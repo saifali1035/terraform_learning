@@ -20,10 +20,10 @@ data "aws_availability_zones" "available" {
 #from private subnet to internet# 
 resource "aws_route_table" "Day2_RT_IG" {
   vpc_id = aws_vpc.Day2_VPC.id
-  route {
+ /* route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.Day2_IG.id
-  }
+  }*/
 
   tags = {
     Name = "Day2_RT_IG"
@@ -53,19 +53,17 @@ resource "aws_route_table_association" "Adding_to_Day2_PRIS" {
 }
 
 
+resource "aws_route" "Day2_Route_PUB" {
+  route_table_id = aws_route_table.Day2_RT_IG.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.Day2_IG.id
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
+##################################################################
 
 
 
@@ -112,7 +110,7 @@ resource "aws_instance" "Day2_PUBS_Bastion_host" {
   ami = "ami-0e670eb768a5fc3d4" #Amazon Linux 2023 AMI 2023.3.20240219.0 x86_64 HVM kernel-6.1
   instance_type = "t2.micro" 
   key_name = "Project1"
-  security_groups = [ aws_security_group.Day2_SG_SSH_BH.id ]
+  vpc_security_group_ids = [ aws_security_group.Day2_SG_SSH_BH.id ]
 
 
   tags = {
@@ -135,7 +133,7 @@ resource "aws_security_group" "Day2_SG_SSH_BH" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [ "0.0.0.0/0", ]
   }
 }
 
@@ -199,7 +197,7 @@ resource "aws_instance" "Day2_PRIS_EC2" {
   ami = "ami-0e670eb768a5fc3d4" #Amazon Linux 2023 AMI 2023.3.20240219.0 x86_64 HVM kernel-6.1
   instance_type = "t2.micro" 
   key_name = "Project1"
-  security_groups = [ aws_security_group.Day2_SG_SSH__FROM_BH.id ]
+  vpc_security_group_ids = [ aws_security_group.Day2_SG_SSH__FROM_BH.id ]
 
   tags = {
     Name = "Day2_PRIS_EC2"
@@ -208,23 +206,18 @@ resource "aws_instance" "Day2_PRIS_EC2" {
 
 #Security Group that  ssh from Bastion host to private instances
 resource "aws_security_group" "Day2_SG_SSH__FROM_BH" {
-  name        = "Allow SSH to private EC2"
-  description = "Allow SSH from Bastion host to private EC2 instances"
-  vpc_id      = aws_vpc.Day2_VPC.id
+  name = "Allow ssh from bastion host"
+  description = "Allow ssh from bastion host"
+  vpc_id = aws_vpc.Day2_VPC.id
   
   ingress {
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
+
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
     security_groups = [aws_security_group.Day2_SG_SSH_BH.id]
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]  # Replace with specific CIDR blocks if possible
-  }
 }
 
 ########################################################
