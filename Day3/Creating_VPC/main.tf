@@ -83,6 +83,12 @@ resource "aws_security_group" "Day3_Security_Group_ssh_Private" {
     protocol = "tcp"
     cidr_blocks = ["10.0.0.128/25"]
   }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 tags = {
   Name = "Day3_Security_Group_ssh_Private"
 }
@@ -113,4 +119,36 @@ tags = {
 }
 }
 
+resource "aws_eip" "Day3_EIP_For_NAT" {
+  domain = "vpc"
+  tags = {
+    Name = "Day3_EIP_For_NAT"
+  }
+}
 
+resource "aws_nat_gateway" "Day3_NAT_Gateway" {
+  subnet_id = aws_subnet.Day3_Public_Subnet.id
+  allocation_id = aws_eip.Day3_EIP_For_NAT.id
+  tags = {
+    Name = "Day3_NAT_Gateway"
+  }
+}
+
+resource "aws_route_table" "Day3_Private_Route_Table" {
+  vpc_id = aws_vpc.Day3_VPC.id
+   tags = {
+     Name = "Day3_Private_Route_Table"
+   }
+}
+
+resource "aws_route" "Day3_Private_Route" {
+  route_table_id = aws_route_table.Day3_Private_Route_Table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_nat_gateway.Day3_NAT_Gateway.id
+
+}
+
+resource "aws_route_table_association" "Day3_Private_Route_Table_Association" {
+  route_table_id = aws_route_table.Day3_Private_Route_Table.id
+  subnet_id = aws_subnet.Day3_Private_Subnet.id
+}
