@@ -1,0 +1,18 @@
+Author - Saif 
+Date - 1/03/2024
+
+
+We have achived connectivity from bastion server to private instance
+and private instance is able to connect to internet using NAT.
+
+We also removed bastion host now as we are using Ec2 Instance Connect
+with VPC endpoints.
+
+Advantages -
+No need of bastion host and its security group
+No need to manage bastion host
+Earlier a malware from bastion host could reach private server but not now.
+
+Disadvantages what i think -
+As we dont know Ec2 Instance Connect's Ip the ingress security group is
+quite open
