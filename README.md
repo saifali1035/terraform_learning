@@ -25,7 +25,8 @@ resource "aws_instance" "Example" {
     }
 }
 ```
-
+*Points to remember*
+1. key_name = "Project1" can only be defined and will not be created by terraform if not present.
 
 # Day-5
 Terraform State file and remote backend.
