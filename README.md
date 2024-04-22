@@ -4,7 +4,11 @@
 # Day-5
 Terraform State file and remote backend.
 
-terraform state file is created when we we run below command
+Terraform state file is created (if not already present), when we we run below command.
 ```terraform
 terraform init
+```
+when we create changes in our terraform configuration ( terraform main.tf file ), and run below
+```terraform
+terraform apply
 ```
