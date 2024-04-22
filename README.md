@@ -33,9 +33,9 @@ terraform {
   }
 }
 ```
-<img width="1200" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/09c772f4-97ac-4ce1-a73b-f3e9a79d86e2">
-<img width="1200" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/af443af5-2124-48d4-a7ec-3866a23459ca">
-<img width="1200" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/6c9fa219-6787-4e86-9270-207cf1df9dcb">
+<img width="1500" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/09c772f4-97ac-4ce1-a73b-f3e9a79d86e2">
+<img width="1500" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/af443af5-2124-48d4-a7ec-3866a23459ca">
+<img width="1500" alt="image" src="https://github.com/saifali1035/terraform_learning/assets/37189361/6c9fa219-6787-4e86-9270-207cf1df9dcb">
 
 *Points to remember*
 1. Bucket should be present before using this.
