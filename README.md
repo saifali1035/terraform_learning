@@ -28,6 +28,13 @@ resource "aws_instance" "Example" {
 *Points to remember*
 1. key_name = "Project1" can only be defined and will not be created by terraform if not present.
 
+
+# Day-2 and Day-3
+We are trying to create VPC using ChatGPT on Day2 while using YT as refrence on Day3
+
+# Day-4
+Learning and using modules, using modules we can eleminate the need of rewriting code for similiar infrastructures.
+
 # Day-5
 Terraform State file and remote backend.
 
