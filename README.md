@@ -32,6 +32,9 @@ terraform {
     region = "ap-south-1"
   }
 }
-
 ```
+*Points to remember*
+1. Bucket should be present before using this.
+2. Creation of bucket manually is recommended while terraform can be used.
+3. Run terraform init after declaring this.
 
