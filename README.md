@@ -1,5 +1,13 @@
 # Terraform Learning Starts at 21st of Feb '24
 
+# Prerequisite
+1. Install aws cli and terraform
+2. AWS Account and user created
+3. AWS user account credentails
+4. Configure aws cli
+
+# Day-1
+
 
 # Day-5
 Terraform State file and remote backend.
