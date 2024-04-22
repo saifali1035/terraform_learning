@@ -22,5 +22,16 @@ Drawbacks that comes with state file -
 2. Any sensetive info written in state file will be exposed if a vcs like github is being used to store state file.
 3. It is hard to keep track of state file if github is being used to keep it available between all the users in team. *(As terraform state file is updated only post changes are made in the infra and any miss in pushing the updated state file to github can cause state file to loose track of changes made)*.
 
-Overcoming these using **Remote Backend Configuration**
+Overcoming these using **Remote Backend Configuration**, we can use cloud, local fs or terraform cloud for this.
+When an update in state file will happen, the updated file will get stored in the defined backend.
+```HCL
+terraform {
+  backend "s3" {
+    bucket = "saif-state-file-bucket"
+    key    = "mumbai-state-file/terraform.tfstate" #we can customize the path where we can our state file
+    region = "ap-south-1"
+  }
+}
+
+```
 
