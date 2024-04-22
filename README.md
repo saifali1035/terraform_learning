@@ -8,7 +8,8 @@ Terraform state file is created (if not already present), when we we run below c
 ```terraform
 terraform init
 ```
-when we create changes in our terraform configuration ( terraform main.tf file ), and run below
+when we create changes in our terraform configuration (terraform main.tf file), and run below
 ```terraform
 terraform apply
 ```
+terraform reads the configuration file and **compares the desired state with current state** (It is recorded in the state file)
